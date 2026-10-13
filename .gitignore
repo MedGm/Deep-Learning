@@ -1,4 +1,8 @@
 .venv/
-lab*/data/
 .ipynb_checkpoints/
 __pycache__/
+
+# NYSE price files are too big for GitHub (download them from Kaggle)
+*/dataset/nyse/prices.csv
+*/dataset/nyse/prices-split-adjusted.csv
+*/dataset/nyse/fundamentals.csv

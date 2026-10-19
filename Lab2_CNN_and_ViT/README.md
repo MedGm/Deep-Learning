@@ -35,14 +35,9 @@ Everything was run with the **Google Colab extension in VS Code**, which gives a
 ### 1. CNN classifier
 Pixels are scaled to 0-1 and normalized (mean 0.1307, std 0.3081).
 
-| Layer | Details |
-|---|---|
-| Conv + BatchNorm + ReLU + MaxPool | 1 -> 16 channels, 3x3 kernel, stride 1, padding 1, pool 2x2 (28 -> 14) |
-| Conv + BatchNorm + ReLU + MaxPool | 16 -> 32 channels, same settings (14 -> 7) |
-| Conv + BatchNorm + ReLU + MaxPool | 32 -> 64 channels, same settings (7 -> 3) |
-| Flatten + Linear + ReLU | 64x3x3 = 576 -> 128 |
-| Dropout | 0.5 |
-| Linear | 128 -> 10 |
+![cnn architecture](figures/cnn_architecture.png)
+
+*I generated this diagram with ChatGPT so it may not be 100% accurate. The code in the notebook is the reference. Summary: 3 blocks of Conv (3x3, stride 1, padding 1) + BatchNorm + ReLU + MaxPool (2x2) with 16, 32 and 64 channels, then Flatten, Linear (576 -> 128), ReLU, Dropout (0.5) and Linear (128 -> 10).*
 
 | Hyper-parameter | Value |
 |---|---|

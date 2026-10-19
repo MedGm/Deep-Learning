@@ -24,6 +24,7 @@ Each lab is an independent project on a specific topic (MLP, CNN, RNN, ...), wit
 | Lab | Folder | Topic | Main content |
 |-----|--------|-------|--------------|
 | **Lab 1 – DNN / MLP with PyTorch** | [`Lab1_DNN_PyTorch/`](Lab1_DNN_PyTorch/) | Regression and multi-class classification | NYSE stock prices (regression) and predictive maintenance (5 failure types). EDA, SMOTE, GridSearch with skorch, Loss/Accuracy curves, metrics, regularization (Dropout, L2, BatchNorm, Early stopping). |
+| **Lab 2 – CNN and Vision Transformer** | [`Lab2_CNN_and_ViT/`](Lab2_CNN_and_ViT/) | Image classification | MNIST dataset, CNN, Faster R-CNN, VGG16, AlexNet, and Vision Transformer. |
 
 > Each folder has its own `README.md` with the goal, the structure, the results and how to run it.
 
@@ -63,7 +64,8 @@ Dataset paths are relative (`../dataset/...`). Some datasets are too big for Git
 ---
 ## Roadmap
 - [x] Lab 1 – DNN / MLP with PyTorch (regression + classification)
-- [ ] Next labs (CNN, RNN, ...) will be added during the module
+- [x] Lab 2 – CNN, Faster R-CNN, fine-tuning and Vision Transformer
+- [ ] Next labs (RNN, Transformer, ...) will be added during the module
 
 ---
 ## Author

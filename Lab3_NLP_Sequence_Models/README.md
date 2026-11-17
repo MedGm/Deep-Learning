@@ -2,27 +2,15 @@
 
 <p align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/PyTorch_logo_icon.svg" height="90" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" height="90" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" height="90" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" height="90" />
 </p>
 
-**Goal:** work with Arabic text. I scrape my own dataset from news websites, clean it with an NLP pipeline, and train four sequence models (**RNN, bidirectional RNN, GRU, LSTM**) to say how relevant a text is to one topic. Then I fine-tune a pretrained **GPT-2** on the same articles and make it write new paragraphs.
+## Goal of the lab
+In the first two labs the data was already there: prices, sensor values, images. This time I had to start from nothing and work with **Arabic text**. The lab has two parts. In the first one I build my own dataset by scraping Arabic websites, give each text a relevance score, clean everything with an NLP pipeline, and train four sequence models, a **simple RNN, a bidirectional RNN, a GRU and an LSTM**, to say how relevant a text is to a topic. In the second part I take a pretrained **GPT-2**, fine-tune it on my own articles, and ask it to write a new paragraph from a sentence I give it.
 
-## Folder structure
-| File / Folder | Description |
-|---------------|-------------|
-| `notebooks/scraping.ipynb` | Collect the articles from 3 Arabic websites. |
-| `notebooks/scoring.ipynb` | Give each text a relevance score (0 to 10) and 3 classes. |
-| `notebooks/preprocessing.ipynb` | NLP pipeline: cleaning, tokenization, stop words, lemmatization, stemming, vocabulary. |
-| `notebooks/models.ipynb` | Part 1 : RNN, BiRNN, GRU and LSTM, hyper-parameter tuning and evaluation. |
-| `notebooks/gpt2_generation.ipynb` | Part 2 : fine-tuning of GPT-2 and text generation. |
-| `dataset/` | `arabic_texts.csv` (the scraped dataset), `processed.npz` and `vocab.json` (ready for the models). |
-| `figures/` | Plots exported from the notebooks and used in this report. |
-| `README.md` | This file (the report). |
+## The dataset and the websites
+I chose one topic: **artificial intelligence and technology news**. There are a lot of Arabic articles about it, the vocabulary is clear (ChatGPT, الذكاء الاصطناعي, روبوت...), and the websites mix very different content, so some texts are really about AI and others are not at all. That is what I need to get relevance scores that are not all the same.
 
-## Dataset
-I chose one topic: **artificial intelligence and technology news**. I scraped **4555 articles** from three Arabic websites:
+My first choice was tech-wd.com, but it is behind a Cloudflare check that refuses scripts. I did not try to get around it and I changed to three other websites. In the end I scraped **4555 articles**:
 
 | Website | Articles | What it is |
 |---|---|---|
@@ -30,20 +18,9 @@ I chose one topic: **artificial intelligence and technology news**. I scraped **
 | [arabhardware.net](https://arabhardware.net) | 1563 | Hardware, reviews and tech news |
 | [aljazeera.net](https://www.aljazeera.net) (tech and ebusiness) | 1500 | General news, so many texts are not about AI |
 
-The first website I tried (tech-wd.com) is behind a Cloudflare check and refuses scripts, so I changed to these three. I did not look for a way around the protection.
+To get the links I did not click through the pages. I read the **sitemaps** of the websites (the XML files that list their articles, and `robots.txt` allows them). Then I open each article with `requests`, and I keep the title and the text with `BeautifulSoup`, with a pause of half a second between two requests to be polite. I removed the duplicates and the texts shorter than 200 characters. The texts have 5000 characters on average. The scraping takes about 2 hours, so the notebook saves every 100 articles and starts again where it stopped if something goes wrong.
 
-How it works: I read the **sitemaps** of the websites (the XML files that list the articles, they are allowed by `robots.txt`) to get the links, then I open each article with `requests` and keep the title and the text with `BeautifulSoup`. There is a pause of half a second between two requests. The final texts are on average 5000 characters long.
-
-## How to run
-```bash
-pip install -r ../requirements.txt
-cd notebooks
-jupyter notebook
-```
-Run the notebooks in this order: scraping, scoring, preprocessing, models, gpt2_generation.
-- The scraping takes about 2 hours from zero (4500 pages). It saves every 100 articles and it continues where it stopped if you run it again.
-- `dataset/raw_*.csv`, `arabic_texts_scored.csv` and `arabic_texts_preprocessed.csv` are not in the repository (they are big and the notebooks create them again). `arabic_texts.csv` is there, so you can start from the scoring notebook.
-- Scraping, scoring and preprocessing ran on my laptop. **The models and GPT-2 notebooks ran on a free NVIDIA T4 GPU on Kaggle**, and I put their results back in the notebooks. The GPT-2 notebook needs internet to download the model.
+About where it ran: the scraping, the scoring and the preprocessing ran on my laptop, and the **models and GPT-2 ran on a free T4 GPU on Kaggle** (I put their results back in the notebooks). The big intermediate files are not in the repository, the notebooks create them again. `dataset/arabic_texts.csv` is the final scraped dataset.
 
 ---
 

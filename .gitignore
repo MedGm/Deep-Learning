@@ -6,3 +6,8 @@ __pycache__/
 */dataset/nyse/prices.csv
 */dataset/nyse/prices-split-adjusted.csv
 */dataset/nyse/fundamentals.csv
+
+# Lab 3: raw and intermediate files are big (the notebooks recreate them), the final dataset is kept
+*/dataset/raw_*.csv
+*/dataset/arabic_texts_scored.csv
+*/dataset/arabic_texts_preprocessed.csv

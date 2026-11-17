@@ -10,3 +10,10 @@ jupyter
 
 # for datasets
 kagglehub
+# for lab 3 (nlp)
+requests
+beautifulsoup4
+tqdm
+qalsadi
+nltk
+transformers
